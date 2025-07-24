@@ -24,7 +24,7 @@ export class PartnersComponent implements OnInit {
     finalAnimatedPartners: any[] = [];
 
     ngOnInit(): void {
-        if (isPlatformBrowser(this.platformId)) return;
+        if (!isPlatformBrowser(this.platformId)) return;
         this.partnesrs$.subscribe((partners: any) => {
             const displayPartners: any[] = [];
             while (displayPartners.length < 15) {

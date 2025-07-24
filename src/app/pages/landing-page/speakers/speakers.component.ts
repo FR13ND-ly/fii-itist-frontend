@@ -82,7 +82,7 @@ export class SpeakersComponent implements OnInit, OnDestroy {
     }
     
     ngOnInit(): void {
-        if (isPlatformBrowser(this.platformId)) {
+        if (!isPlatformBrowser(this.platformId)) {
             this.intervalSubscriber = interval(5000).subscribe(() =>
                 this.onNext()
             );
