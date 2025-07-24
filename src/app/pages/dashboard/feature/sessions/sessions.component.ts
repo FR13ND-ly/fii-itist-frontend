@@ -1,8 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { DialogService } from '@ngneat/dialog';
 import tinycolor from 'tinycolor2';
 import { UserService } from '../../../../core/services/user.service';
-import { NgStyle } from '@angular/common';
+import { isPlatformBrowser, NgStyle } from '@angular/common';
 import { SessionsService } from '../../../../core/services/sessions.service';
 import { TimeSlotEditorDialogComponent } from '../../dialogs/time-slot-editor-dialog/time-slot-editor-dialog.component';
 import { HallEditorDialogComponent } from '../../dialogs/hall-editor-dialog/hall-editor-dialog.component';
@@ -21,6 +21,7 @@ export class SessionsComponent implements OnInit {
     userService = inject(UserService);
     sessionsService = inject(SessionsService);
     authService = inject(AuthService);
+    platformId = inject(PLATFORM_ID);
 
     halls: any = [];
 
@@ -34,6 +35,7 @@ export class SessionsComponent implements OnInit {
     }
 
     ngOnInit() {
+      if (!isPlatformBrowser(this.platformId)) return;
       this.sessionsService.getTimeSlots().subscribe((timeSlots: any) => {
         this.timeSlots = timeSlots;
         this.buildAgenda(this.timeSlots, this.halls, this.sessions);

@@ -6,7 +6,7 @@ import { SpeakersService } from '../../../core/services/speakers.service';
 
 @Component({
     selector: 'lp-speakers',
-    imports: [AsyncPipe],
+    imports: [],
     templateUrl: './speakers.component.html',
     styleUrl: './speakers.component.scss'
 })
@@ -43,6 +43,7 @@ export class SpeakersComponent implements OnInit, OnDestroy {
     prev$ = new Subject<void>();
 
     constructor() {
+        if (!isPlatformBrowser(this.platformId)) return;
         merge(
             this.next$.pipe(map(() => 1)),
             this.prev$.pipe(map(() => -1))

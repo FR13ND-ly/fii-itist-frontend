@@ -26,7 +26,7 @@ export class HeaderComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       let accountButton = document.getElementById('account-button') as HTMLElement;
-      this.marginLeft.set( Math.trunc(accountButton.getBoundingClientRect().left - 200));
+      this.marginLeft.set(Math.trunc(accountButton.getBoundingClientRect().left - 200));
     }
   }
 

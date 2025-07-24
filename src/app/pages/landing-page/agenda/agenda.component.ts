@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DialogService } from '@ngneat/dialog';
 import { SessionDetailsDialogComponent } from './session-details-dialog/session-details-dialog.component';
 import { PauseDetailsDialogComponent } from './pause-details-dialog/pause-details-dialog.component';
-import { NgStyle } from '@angular/common';
+import { isPlatformBrowser, NgStyle } from '@angular/common';
 import tinycolor from 'tinycolor2';
 import { SessionsService } from '../../../core/services/sessions.service';
 import { UserService } from '../../../core/services/user.service';
@@ -21,7 +21,8 @@ export class AgendaComponent implements OnInit {
     sessionsService = inject(SessionsService);
     authService = inject(AuthService);
     agenda: any;
-
+    platformId = inject(PLATFORM_ID);
+    
     halls: any = []
 
     timeSpans = []
@@ -36,6 +37,7 @@ export class AgendaComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (!isPlatformBrowser(this.platformId)) return;
         this.sessionsService.getTimeSlots().subscribe((timeSpans: any) => {
             this.timeSpans = timeSpans;
             this.buildAgenda(this.timeSpans, this.halls, this.sessions);

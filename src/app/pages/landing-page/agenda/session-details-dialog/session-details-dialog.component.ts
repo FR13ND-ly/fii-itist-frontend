@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-session-details-dialog',
-  imports: [NgStyle, RouterLink],
+  imports: [NgStyle],
   templateUrl: './session-details-dialog.component.html',
   styleUrl: './session-details-dialog.component.scss'
 })
