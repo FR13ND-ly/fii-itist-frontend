@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
 import { UserService } from '../../../../core/services/user.service';
 import { first } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
@@ -11,6 +12,7 @@ import { first } from 'rxjs';
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent implements OnInit {
+    platformId = inject(PLATFORM_ID);
     authService = inject(AuthService)
     userService = inject(UserService);
     fb = new FormBuilder();
@@ -32,19 +34,20 @@ export class SettingsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.userService.getUserById(this.auth.id).subscribe((user: any) => {
-        this.settingsForm.patchValue({
-          firstName: user.firstName || '',
-          lastName: user.lastName || '',
-          educationLevel: user.educationLevel || '',
-          educationInstitution: user.educationInstitution || '',
-          educationYear: user.educationYear || '',
-          faculty: user.faculty || '',
-          occupation: user.occupation || '',
-          experience: user.experience || '',
-          heardAboutUs: user.heardAboutUs || ''
+        if (!isPlatformBrowser(this.platformId)) return;
+        this.userService.getUserById(this.auth.id).subscribe((user: any) => {
+            this.settingsForm.patchValue({
+            firstName: user.firstName || '',
+            lastName: user.lastName || '',
+            educationLevel: user.educationLevel || '',
+            educationInstitution: user.educationInstitution || '',
+            educationYear: user.educationYear || '',
+            faculty: user.faculty || '',
+            occupation: user.occupation || '',
+            experience: user.experience || '',
+            heardAboutUs: user.heardAboutUs || ''
+            });
         });
-      });
     }
 
     educationLevels = [

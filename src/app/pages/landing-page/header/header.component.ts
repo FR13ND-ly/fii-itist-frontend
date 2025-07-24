@@ -28,9 +28,6 @@ export class HeaderComponent implements AfterViewInit {
       let accountButton = document.getElementById('account-button') as HTMLElement;
       this.marginLeft.set( Math.trunc(accountButton.getBoundingClientRect().left - 200));
     }
-    this.user$.subscribe(user => {
-      console.log('User data:', user);
-    });
   }
 
   onLogout() {

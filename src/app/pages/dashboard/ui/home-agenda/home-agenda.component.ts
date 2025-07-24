@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { DialogService } from '@ngneat/dialog';
 import { SessionDetailsDialogComponent } from '../../dialogs/session-details-dialog/session-details-dialog.component';
 import { PauseDetailsDialogComponent } from '../../dialogs/pause-details-dialog/pause-details-dialog.component';
 import tinycolor from 'tinycolor2';
-import { NgStyle } from '@angular/common';
+import { isPlatformBrowser, NgStyle } from '@angular/common';
 import { UserService } from '../../../../core/services/user.service';
 import { SessionsService } from '../../../../core/services/sessions.service';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -15,6 +15,7 @@ import { AuthService } from '../../../../core/services/auth.service';
   styleUrl: './home-agenda.component.scss'
 })
 export class HomeAgendaComponent {
+    platformId = inject(PLATFORM_ID);
     dialog = inject(DialogService);
     agenda: any;
     userService = inject(UserService);
@@ -376,14 +377,12 @@ export class HomeAgendaComponent {
         }
     ];
 
-    enrolments$ = this.userService.getEnrolments(this.authService.getUserData().id);
-
-
     getTextColor(bgColor: string): string {
         return tinycolor(bgColor).darken(30).toHexString();
     }
 
     ngOnInit() {
+        if (!isPlatformBrowser(this.platformId)) return;
         this.sessionsService.getTimeSlots().subscribe((timeSpans: any) => {
             this.timeSpans = timeSpans;
             this.buildAgenda(this.timeSpans, this.halls, this.sessions);
@@ -395,7 +394,8 @@ export class HomeAgendaComponent {
         this.sessionsService.getSessions().subscribe((sessions: any) => {
             this.sessions = sessions;
             this.buildAgenda(this.timeSpans, this.halls, this.sessions);
-            this.enrolments$.subscribe((enrolments: any) => {
+            if (!this.authService.getUserData().id) return;
+            this.userService.getEnrolments(this.authService.getUserData().id).subscribe((enrolments: any) => {
                 enrolments.forEach((enrolment: any) => {
                     this.sessions.forEach((session: any) => {
                         if (session._id === enrolment.sessionId) {
