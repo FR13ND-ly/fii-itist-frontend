@@ -1,0 +1,71 @@
+<div class="mb-8 flex flex-col w-full items-center">
+    <form class="w-full" [formGroup]="emailForm" (ngSubmit)="handleSubmit()">
+        <div class="space-y-2">
+            <label
+                class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                for="email">E-mail</label>
+            <input
+                class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="ion.popescu@gmail.com" id="email" name="email" type="email" formControlName="email">
+        </div>
+        @if (verificationSent()) {
+            @if (verified()) {
+                <div class="space-y-2 mt-4">
+                    <label
+                        class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                        for="password">Parola</label>
+                    <input
+                        class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        placeholder="parola" id="password" name="password" formControlName="password" type="password">
+                </div>
+                <div class="space-y-2 mt-4">
+                    <label
+                        class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                        for="confirm-password">Confirmă parola</label>
+                    <input
+                        class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        placeholder="confirmă parola" id="confirm-password" name="confirm-password" formControlName="confirmPassword" type="password">
+                </div>
+                <button
+                    class="inline-flex items-center text-white mt-8 justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 w-full"
+                    type="submit">Următorul pas</button>
+            }
+            @else {
+            <div class="space-y-2 mt-4">
+                <label
+                    class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                    for="verification-code">Cod de verificare</label>
+                <input
+                    class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="cod" id="verification-code" name="verification-code" formControlName="verificationCode">
+            </div>
+            <button
+                class="inline-flex items-center text-white mt-8 justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 w-full"
+                type="submit">Verifică email</button>                        
+            }
+        }
+        @else {
+        <button
+            class="inline-flex items-center text-white mt-8 justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 w-full"
+            type="submit">Trimite code de verificare</button>
+        }
+    </form>
+    <span
+        class="relative w-full mt-4 text-center text-sm text-violet-400 before:absolute before:left-0 before:top-1/2 before:h-[1px] before:w-[calc(50%-8ch)] before:bg-violet-400 after:absolute after:right-0 after:top-1/2 after:h-[1px] after:w-[calc(50%-8ch)] after:bg-violet-400">sau
+        continuă cu
+    </span>
+    <button
+        (click)="signUpWithGoogle()"
+        class="inline-flex items-center mt-4 justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-transparent hover:text-accent-foreground h-10 px-6 py-2 w-full gap-4 border-neutral-300 text-black transition hover:bg-black/5">
+        <img
+            alt="Google logo" loading="lazy" width="24" height="24" decoding="async" data-nimg="1"
+            src="google-logo.webp">Google
+        </button>
+        <span class="text-sm mt-4 font-medium">Ai deja conts?
+            <a
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 text-primary decoration-primary underline-offset-8 hover:underline font-medium h-10 py-2 px-2"
+            href="/sign-in" routerLink="/sign-in">
+                Conectează-te acum
+            </a>
+        </span>
+</div>

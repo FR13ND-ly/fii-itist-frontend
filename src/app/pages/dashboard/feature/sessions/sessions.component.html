@@ -1,0 +1,77 @@
+<h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 dark:text-white">Talks</h1>
+<div class="overflow-x-auto">
+    <table class="w-full rounded-3xl overflow-hidden border-collapse bg-white text-[10px] xl:text-base">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th class="border p-3 text-left">Interval</th>
+                @for (hall of halls; track $index) {
+                <th class="min-w-32 border p-3 text-left cursor-pointer hover:bg-red-700" (click)="onEditHall(hall)">
+                    <div class="flex flex-col justify-between gap-2">
+                        <span>{{ hall.name }}</span>
+                        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium ring-offset-background transition-colors gap-2 text-primary-foreground hover:bg-primary/75 mt-full h-fit w-fit border border-white bg-black/10 px-3 py-2 text-[10px] leading-none xl:text-xs">
+                            Află cum ajungi 
+                        </button>
+                    </div>
+                </th>
+                }
+                <th class="p-3 items-center justify-center">
+                    <button (click)="onAddHall()"><span class="material-symbols-outlined">add_circle</span></button>
+                </th>
+
+        </thead>
+        <tbody>
+            @for (row of agenda; track $index) {
+                <tr>
+                    @for (col of row; track $index) {
+                        @if ($first) {
+                            <td class="border p-4 font-semibold text-gray-700 cursor-pointer hover:bg-gray-50" (click)="onEditTimeSlot(col)">{{ col.startTime }} - {{ col.endTime }}</td>
+                            @if (row[0].noHalls) {
+                            <td [attr.colspan]="halls.length" 
+                                class="p-2 text-center justify-center w-full border font-bold cursor-pointer hover:bg-gray-50">
+                                {{ row[0].details.title }}
+                            </td>
+                            }
+                        } 
+                        @else {
+                        <td class="cursor-pointer border p-2 hover:bg-gray-50 relative">
+                            @if (col) {
+                                <div class="h-48" (click)="onEditSession(col)">
+                                    <div class="font-montserrat rounded-[4px] font-semibold mb-2 w-fit px-2 py-1 text-[10px] xl:text-base"
+                                        [ngStyle]="{
+                                            'background-color': col.typeColor + '33',
+                                            'color': getTextColor(col.typeColor)
+                                        }">
+                                        {{ col.type }}
+                                    </div>
+                                    <div class="mb-2 font-semibold">{{ col.title }}</div>
+                                    @for (speaker of col.speakers; track $index) {
+                                    <article class="mb-2 flex items-center gap-2 text-sm text-gray-600">
+                                        <span class="relative flex shrink-0 overflow-hidden rounded-full h-6 w-6 xl:h-8 xl:w-8">
+                                            <img alt="{{ speaker.name }}" loading="lazy" width="64" height="64"
+                                                decoding="async" data-nimg="1" class="h-full w-full object-cover"
+                                                [src]="speaker.imageUrl">
+                                        </span>
+                                        <span class="text-[10px] leading-tight xl:text-sm">{{ speaker.name }}</span>
+                                    </article>
+                                    }
+                                </div>
+                            } @else {
+                                <div class="h-48 flex items-center justify-center" (click)="onAddSession(halls[$index - 1]._id, row[0]._id)">
+                                    <span class="material-symbols-outlined">add_circle</span>
+                                </div>
+                            }
+                        }
+                    }
+                    <td class="cursor-pointer border p-2 hover:bg-gray-50 relative"></td>
+                </tr>
+            }
+            <tr>
+                <td [attr.colspan]="halls.length + 2" class="cursor-pointer border p-2 hover:bg-gray-50 relative">
+                    <button class="w-full h-full p-3 text-center text-gray-700 hover:text-gray-900 flex justify-center gap-2" (click)="onAddTimeSlot()">
+                        <span class="material-symbols-outlined">add_circle</span> Adaugă interval de timp
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

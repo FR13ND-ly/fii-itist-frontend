@@ -1,0 +1,140 @@
+<p class="border-l-2 border-primary pl-2 mt-2">Aceste detalii ne vor ajuta să te cunoaștem mai bine.</p>
+<form class="flex w-full flex-col gap-8 mt-8 xl:grid xl:grid-cols-2" [formGroup]="additionalInfoForm" (ngSubmit)="handleSubmit()">
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Nivelul de educație
+        </label>
+        <select class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="educationLevel">
+            <option selected disabled>Nivelul de educație</option>
+            @for (option of educationLevels; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+    @if (additionalInfoForm.get('educationLevel')?.value === 'Liceu') {
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Liceu
+        </label>
+        <select class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="educationInstitution">
+            <option selected disabled>Liceu</option>
+            @for (option of highSchools; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Clasa
+        </label>
+        <select class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="educationYear">
+            <option selected disabled>Clasa</option>
+            @for (option of educationYearsHighSchool; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+    }
+    @if (['Licență', 'Master', 'Doctorat'].includes(additionalInfoForm.get('educationLevel')?.value)) {
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Universitate
+        </label>
+        <select 
+            class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="educationInstitution"
+            (click)="onSelectUniversity($event.target)">
+            <option selected disabled>Universitate</option>
+            @for (option of universities; track option) {
+                <option [value]="option.name" >{{ option.name }}</option>
+            }
+        </select>
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Facultate
+        </label>
+        <select class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="faculty">
+            <option selected disabled>Facultate</option>
+            @for (option of faculties; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Anul de studiu
+        </label>
+        <select class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="educationYear">
+            <option selected disabled>Anul de studiu</option>
+            @for (option of educationYears; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+    }
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Ocupație
+        </label>
+        <select class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="occupation">
+            <option selected disabled>Ocupație</option>
+            @for (option of occupations; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Experiență profesională
+        </label>
+        <select class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="experience">
+            <option selected disabled>Experiență profesională</option>
+            @for (option of experienceLevels; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+            Cum ai auzit de noi?
+        </label>
+        <textarea
+            class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            formControlName="heardAboutUs"></textarea>
+    </div>
+    <div class="col-span-2 flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+        <input
+            [(ngModel)]="gdpr" [ngModelOptions]="{standalone: true}"
+            class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+            tabindex="-1" type="checkbox" value="on">
+        <div class="space-y-1 leading-none">
+            <label
+                class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold">
+                Acord de prelucrare a datelor
+            </label>
+            <p id=":ru:-form-item-description" class="text-sm text-muted-foreground">
+                Sunt de acord ca datele mele să fie colectate și procesate conform 
+                <a class="underline" href="/GDPR.pdf">notei de informare conform GDPR</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-span-2 flex flex-col gap-4 xl:flex-row">
+        <button
+            (click)="previousStage()"
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 border border-primary text-primary bg-transparent hover:bg-white/5 hover:text-accent-foreground h-10 px-6 py-2 order-1 flex-1 xl:order-none"
+            type="button">Pas anterior</button>
+        <button
+            [disabled]="!gdpr"
+            class="inline-flex items-center text-white justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 flex-1"
+            type="submit">Următorul pas</button>
+    </div>
+</form>

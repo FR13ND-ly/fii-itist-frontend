@@ -1,0 +1,64 @@
+<div class="flex flex-col gap-3 p-6 lg:p-8 bg-white dark:bg-gray-900">
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+        @if (session?._id) { Edit Session } @else { Add New Session }
+    </h1>
+
+    <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+        <div class="flex flex-col gap-4 mt-4">
+
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+                <input id="title" formControlName="title" type="text"
+                    class="mt-1 h-10 w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-gray-200 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" />
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Type</label>
+                    <input id="type" formControlName="type" type="text" placeholder="e.g., Workshop"
+                        class="mt-1 h-10 w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-gray-200 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" />
+                </div>
+                <div>
+                    <label for="typeColor" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Color</label>
+                    <div class="flex">
+                        <input id="typeColor" formControlName="typeColor" type="text"
+                            class="mt-1 h-10 w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-gray-200 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" />
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+                <textarea id="description" formControlName="description" rows="4"
+                    class="mt-1 w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-gray-200 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Speakers</label>
+                <div class="mt-2 grid gap-x-4 gap-y-2 p-4 border max-h-40 overflow-y-auto border-gray-300 dark:border-gray-700 rounded-lg">
+                    @for (speaker of speakers; track $index) {
+                    <div class="flex items-center">
+                        <input [id]="'speaker-' + speaker._id" type="checkbox" [value]="speaker._id"
+                            (change)="onSpeakerChange(speaker._id)" [checked]="isSpeakerSelected(speaker._id)"
+                            class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 bg-gray-100 dark:bg-gray-700 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2">
+                        <label [for]="'speaker-' + speaker._id" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ speaker.name }}</label>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between mt-8">
+            <button type="submit" [disabled]="sessionForm.invalid"
+                class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                Save
+            </button>
+            @if (session?._id) {
+            <button  type="button" (click)="onDelete()"
+                class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                Delete
+            </button>
+            }
+        </div>
+    </form>
+</div>

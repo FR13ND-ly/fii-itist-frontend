@@ -1,0 +1,44 @@
+<div class="flex flex-col gap-3 p-6 lg:p-8 dark:bg-gray-900">
+  <h1 class="text-2xl font-bold dark:text-white">
+    @if (partner?._id) { Editează Partener-ul} @else { Adaugă Partener }
+  </h1>
+  <form class="space-y-2" [formGroup]="partnerForm" (ngSubmit)="handleSubmit()">
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+            for="name">Nume</label>
+        <input
+            class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="Numele Partenerului" id="name" name="name" formControlName="name">
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+            for="type">Tip</label>
+        <input
+            class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="Tipul Partenerului" id="type" name="type" formControlName="type">
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+            for="imageUrl">Imagine</label>
+        <input
+            class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="https://example.com/image.jpg" id="imageUrl" name="imageUrl" formControlName="imageUrl">
+    </div>
+    <div class="space-y-2">
+        <label
+            class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+            for="url">URL</label>
+        <input
+            class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="https://example.com" id="url" name="url" formControlName="url">
+    </div>
+    <div class="flex justify-end pt-4">
+        <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 text-white">
+            @if (partner?._id) { Salvează } @else { Adaugă }
+        </button>
+    </div>
+    </form>
+</div>

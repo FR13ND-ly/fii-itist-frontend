@@ -1,0 +1,35 @@
+@if (speakers$ | async; as speakers) {
+<div class="flex justify-between items-start">
+  <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 dark:text-white">Speakeri</h1>
+  <button
+    (click)="onAddSpeaker(speakers)"
+    class="text-indigo-600 rounded-lg flex items-center space-x-1 pl-2 pr-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-800 select-none"
+  >
+    <span class="material-symbols-outlined scale-75">add</span>
+    <span>Adaugă Speaker</span>
+  </button>
+</div>
+<div class="flex flex-col gap-4">
+  @for (speaker of speakers; track speaker._id) {
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <div class="flex items-center justify-between p-4">
+            <div class="flex items-center gap-4">
+            <img [src]="speaker.imageUrl" alt="{{ speaker.name }}" class="w-16 h-16 rounded-full">
+            <div>
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ speaker.name }}</h2>
+                <p class="text-gray-600 dark:text-gray-400">{{ speaker.description }}</p>
+            </div>
+            </div>
+            <div class="flex items-center gap-2">
+            <button (click)="onEditSpeaker(speakers, $index)">
+                <span class="material-symbols-outlined hover:text-primary">edit</span>
+            </button>
+            <button (click)="onDeleteSpeaker(speakers, $index)">
+                <span class="material-symbols-outlined hover:text-primary">delete</span>
+            </button>
+            </div>
+        </div>
+    </div>
+  }
+  </div>
+}

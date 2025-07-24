@@ -1,0 +1,58 @@
+<main class="flex min-h-screen">
+    <div class="mx-auto flex max-w-96 flex-1 flex-col items-center gap-8 px-8 py-16 xl:max-w-screen-sm">
+        @if (stage() === 3) {
+            <confirmation-stage />
+        } @else {
+        <h1 class="text-5xl font-bold">Sign up</h1>
+        <div class="mb-8 flex w-full items-center">
+            <div class="relative col-span-1 flex h-10 w-10 items-center justify-center rounded-full border border-primary bg-primary">
+                <span class="font-semibold text-white">1</span>
+                <div
+                    class="absolute top-12 max-w-20 whitespace-pre text-wrap text-center text-xs text-black"
+                    >Verificare email</div>
+                </div>
+            <div class="h-[2px] flex-1 bg-neutral-200" [class.bg-red-500]="stage() > 0"></div>
+            <div 
+                class="relative col-span-1 flex h-10 w-10 items-center justify-center rounded-full border border-primary"
+                [class.bg-primary]="stage() > 0">
+                <span class="font-semibold text-primary" [class.text-white]="stage() > 0">2</span>
+                <div 
+                    class="absolute top-12 max-w-20 whitespace-pre text-wrap text-center text-xs text-black"
+                    >Informații de bază</div>
+            </div>
+            <div class="h-[2px] flex-1 bg-neutral-200" [class.bg-red-500]="stage() > 1"></div>
+            <div 
+                class="relative col-span-1 flex h-10 w-10 items-center justify-center rounded-full border border-primary"
+                [class.bg-primary]="stage() > 1">
+                <span class="font-semibold text-primary" [class.text-white]="stage() > 1">3</span>
+                <div
+                    class="absolute top-12 max-w-20 whitespace-pre text-wrap text-center text-xs text-black"
+                    >Detalii suplimentare</div>
+            </div>
+        </div>
+        @if (stage() === 0) {
+            <email-stage (next)="handleEmail($event)"/>
+        } @else if (stage() === 1) {
+            <base-info-stage [baseInfoForm]="basicInfoForm" (next)="handleBasicInfo()" (previous)="previousStage(0)" />
+        } @else if (stage() === 2) {
+            <additional-info-stage [additionalInfoForm]="additionalInfoForm" (next)="handleAdditionalInfo()" (previous)="previousStage(1)" />
+        }
+        }
+    </div>
+    <aside
+        class="relative min-w-[450px] max-w-[450px] flex-col items-center overflow-hidden bg-secondary px-2 py-8 [@media(max-height:750px)]:hidden hidden flex-1 md:flex">
+        <img alt="FII IT-ist Logo" loading="lazy" width="170" height="55" decoding="async" data-nimg="1" src="/logo.svg"
+            style="color: transparent;">
+        <p class="mt-16 text-center text-4xl font-semibold text-white">Școala pentru <span
+                class="text-primary">IT</span>-iști <br> și <span class="text-primary">super IT</span>-iști</p><img
+            alt="Wonder IT-ist" loading="lazy" width="1080" height="1350" decoding="async" data-nimg="1"
+            class="absolute bottom-24 left-1/2 z-10 ml-[-100px] w-[220px] -translate-x-1/2 transform"
+            src="/wonder-it-ist.svg" style="color: transparent;"><img alt="Captain IT-ist" loading="lazy" width="1080"
+            height="1350" decoding="async" data-nimg="1"
+            class="absolute bottom-64 left-1/2 z-10 ml-[100px] w-[180px] -translate-x-1/2 transform"
+            src="/captain-it-ist.svg" style="color: transparent;"><img alt="wave" loading="lazy" width="938"
+            height="544" decoding="async" data-nimg="1"
+            class="absolute -bottom-20 -right-[500px] min-w-[500px] scale-[2.5]" src="/wave.svg"
+            style="color: transparent;">
+    </aside>
+</main>

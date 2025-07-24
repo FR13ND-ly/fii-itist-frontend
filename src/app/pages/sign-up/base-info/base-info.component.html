@@ -1,0 +1,29 @@
+<div class="mb-8 flex flex-col w-full items-center">
+    <form class="w-full flex-col gap-8 xl:grid xl:grid-cols-2" [formGroup]="baseInfoForm" (ngSubmit)="handleSubmit()">
+        <div class="space-y-2">
+            <label
+                class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                for="first-name">Prenume
+            </label>
+            <input
+                class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Ion" id="first-name" name="firstName" formControlName="firstName">
+        </div>
+        <div class="space-y-2">
+            <label
+                class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                for="last-name">Nume</label>
+            <input
+                class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Popescu" id="last-name" name="lastName" formControlName="lastName">
+        </div>
+        <div class="col-span-2 flex flex-col gap-4 xl:flex-row">
+            <button
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 border border-primary text-primary bg-transparent hover:bg-white/5 hover:text-accent-foreground h-10 px-6 py-2 order-1 flex-1 xl:order-none"
+                type="button" (click)="previousStage()">Pas anterior</button>
+            <button
+                class="inline-flex items-center justify-center text-white whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 flex-1"
+                type="submit">Următorul pas</button>
+            </div>
+    </form>
+</div>

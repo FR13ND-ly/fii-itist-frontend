@@ -1,0 +1,60 @@
+<section class="mx-auto flex w-full max-w-screen-xl flex-col justify-center px-8 pt-8 xl:items-center xl:px-0">
+    <div class="mb-16 flex flex-col items-center"> 
+        <div class="mx-auto mb-16 flex flex-col gap-2">
+            <p class="mb-2 text-center text-xl font-bold text-primary xl:text-4xl">Conferința demo</p>
+            @if (!auth?.id) {
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary h-5 w-5 xl:h-6 xl:w-6">checkbook</span>
+                <a class="inline-flex items-center justify-center whitespace-nowrap rounded-full ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 hover:underline px-6 py-2 h-auto !p-0 !text-base !font-bold !text-black underline !decoration-black underline-offset-auto xl:text-xl"
+                    target="_blank" rel="noopener noreferrer" href="https://forms.gle/e64dEr32Cb756fMs7">
+                    Inscrie-te aici!
+                </a>
+            </div>
+            }
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary h-5 w-5 xl:h-6 xl:w-6">history_2</span>
+                <p class="text-center !text-base font-medium xl:text-xl">26 Octombrie, 10:00 - 14:00</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary h-5 w-5 xl:h-6 xl:w-6">location_on</span>
+                <a class="inline-flex items-center justify-center whitespace-nowrap rounded-full ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 hover:underline font-medium px-6 py-2 h-auto !p-0 !text-base !text-black underline !decoration-black underline-offset-auto xl:text-xl"
+                    target="_blank" rel="noopener noreferrer" href="https://maps.app.goo.gl/LAHQ3Htz7D348g8J8">
+                    Zbor Hub (parter Bytex)
+                </a>
+            </div>
+        </div>
+        <div class="mx-auto mb-[100px] flex w-full max-w-[1275px] flex-col items-center gap-[10px]">
+            <div class="flex w-full flex-wrap justify-center gap-[10px]">
+                @for (demo of demos; track $index) {
+                <div class="group m-[10px] flex w-full max-w-[385px] flex-grow flex-col gap-4 rounded-[10px] p-[20px] text-[#000000] shadow-2xl transition-all hover:bg-[#17152E] hover:text-white sm:w-auto sm:flex-grow-0">
+                    <div class="flex items-center justify-between">
+                        <div 
+                            class="font-montserrat rounded-[4px] px-[14px] py-[8px] text-[14px] font-semibold transition-all duration-300 group-hover:brightness-[300%]"
+                            [ngStyle]="{
+                                'background-color': demo.typeColor + '33',
+                                'color': getTextColor(demo.typeColor)
+                            }">
+                            {{ demo.type }}
+                            
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <img [alt]="demo.speaker.name" class="h-12 w-12 rounded-full object-cover"
+                            [src]="demo.speaker.image">
+                        </div>
+                    </div>
+                    <div class="font-montserrat text-[20px] font-bold hover:text-white">{{ demo.title }}</div>
+                    <div class="font-montserrat mb-auto text-[16px] font-normal group-hover:text-[#C7BFC4]">
+                        {{ demo.description }}
+                    </div>
+                    <div class="mt-4 flex flex-col justify-between gap-4 xl:flex-row xl:gap-2">
+                        <div class="flex items-center">
+                            <span class="material-symbols-outlined text-primary h-5 w-5 xl:h-6 xl:w-6 mr-1 mt-[1px]">history_2</span>
+                            <span class="font-montserrat text-[20px] font-semibold hover:text-white">{{ demo.time }}</span>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

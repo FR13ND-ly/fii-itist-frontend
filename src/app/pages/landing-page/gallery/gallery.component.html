@@ -1,0 +1,25 @@
+<section class="container mx-auto flex max-w-screen-xl flex-col items-center gap-12 py-24 xl:gap-32 xl:py-40">
+    <div>
+        <p class="relative z-10 text-center text-2xl font-bold text-black xl:text-5xl">
+            <span class="absolute left-1/2 top-0 -z-10 -mt-8 -translate-x-1/2 transform select-none text-6xl font-black text-black/10 xl:-mt-14 xl:text-8xl">
+                GALERIE
+            </span>
+            <span class="text-primary">Cum</span> a fost?
+        </p>
+        <p class="top-56 mt-8 max-w-screen-sm text-center text-sm text-secondary xl:text-base">
+            Aruncă o privire la momentele de neuitat din cadrul conferințelor "FII
+            IT-ist" și vezi cum participanții au interacționat cu experții din
+            industrie.
+        </p>
+    </div>
+    <div class="grid w-full grid-cols-2 grid-rows-none gap-4 xl:grid-cols-4 xl:grid-rows-2 xl:gap-8">
+        <img [alt]="galleryItems[0].title" loading="lazy" [src]="galleryItems[0].imageUrl"
+            class="order-3 col-span-2 row-span-2 w-full xl:order-1 xl:h-full" />
+        <img [alt]="galleryItems[1].title" loading="lazy" [src]="galleryItems[1].imageUrl"
+            class="order-2 col-span-1 row-span-1 w-full xl:order-3 xl:h-full" />
+        <img [alt]="galleryItems[2].title" loading="lazy" [src]="galleryItems[2].imageUrl"
+            class="order-1 col-span-1 row-span-1 w-full xl:order-2 xl:h-full" />
+        <img [alt]="galleryItems[3].title" loading="lazy" [src]="galleryItems[3].imageUrl"
+            class="order-4 col-span-2 row-span-1 w-full xl:order-4 xl:h-full" />
+    </div>
+</section>

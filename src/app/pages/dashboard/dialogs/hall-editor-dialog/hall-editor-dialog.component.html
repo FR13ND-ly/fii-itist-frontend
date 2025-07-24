@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-3 p-6 lg:p-7 dark:bg-gray-900">
+  <h1 class="text-2xl font-bold dark:text-white">
+    @if (hall?._id) { Editează Sala } @else { Adaugă Sala }
+  </h1>
+  <form [formGroup]="hallForm" (ngSubmit)="handleSubmit()">
+    <div class="flex flex-col gap-4 mt-2">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nume</label>
+        <input id="name" formControlName="name" type="text" 
+        class="mt-2 h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+      </div>
+      <div>
+        <label for="location" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Locație</label>
+        <input id="location" formControlName="location" type="text" 
+        class="mt-2 h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+      </div>
+    </div>
+    <div class="mt-6">
+      <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">Salvează</button>
+    </div>
+  </form>
+</div>

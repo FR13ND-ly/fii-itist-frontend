@@ -1,0 +1,54 @@
+<section id="speakers-section" class="bg-secondary">
+    <div class="container relative mx-auto flex max-w-screen-xl flex-col items-center justify-center bg-secondary pb-32 pt-32">
+        <div class="relative mb-6 flex flex-col items-center justify-center pt-8">
+            <h2 class="z-10 mt-6 text-[22px] font-bold leading-[28px] text-primary md:text-[47px] md:leading-[57.6px]">
+                Cine <span class="text-white">vorbește?</span></h2>
+            <h1 class="absolute xl:-top-7 select-none font-sans text-[52px] font-black text-white/5 md:text-[100px]">SPEAKERI</h1>
+            <p class="mb-12 max-w-[589px] text-center text-gray-300 mt-4 text-[14px] font-normal leading-[24px] text-caption opacity-80 md:text-[16px]">Află mai multe despre speakerii de top care vor împărtăși cunoștințele și experiențele lor în cadrul conferințelor " FII IT-ist ".</p>
+        </div>
+
+        <div class="flex w-full max-w-6xl items-center justify-center gap-2 md:gap-8">
+            
+            <button (click)="onPrev()" class="z-10 flex h-fit shrink-0 items-center justify-center rounded-full border-2 border-transparent p-1 text-red-600 transition-colors duration-300 hover:bg-red-600 hover:text-white" aria-label="Previous Speaker">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+            </button>
+
+            <div class="w-full overflow-hidden">
+                <div class="flex" 
+                    [style.transform]="trackTransform()" 
+                    [class.transition-transform]="isTransitioning()" 
+                    [class.duration-300]="isTransitioning()">
+                    
+                    @for (speaker of displaySpeakers(); track speaker._id + $index) {
+                    <div class="min-w-0 shrink-0 grow-0 basis-1/3 pl-5">
+                        <div class="flex flex-col text-white">
+                            <div class="group relative aspect-[3/4] h-full w-full">
+                                <img [alt]="speaker.name" loading="lazy" class="transform rounded-3xl object-cover transition duration-300 ease-in-out" style="position: absolute; height: 100%; width: 100%; inset: 0px;" [src]="speaker.imageUrl">
+                                <div class="absolute inset-0 flex items-center justify-center rounded-3xl bg-black bg-opacity-60 opacity-0 transition duration-300 ease-in-out group-hover:opacity-100">
+                                    <a [href]="speaker.linkedInUrl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                        <img alt="LinkedIn" loading="lazy" width="40" height="40" src="/linked-in.svg">
+                                    </a>
+                                </div>
+                            </div>
+                            <h4 class="mb-[12px] mt-6 text-center text-[18px] font-bold leading-[33.6px] md:text-[28px]">
+                                {{ speaker.name }}
+                            </h4>
+                            <h5 class="text-center text-[16px] leading-[24px] text-gray-300 opacity-80 md:text-[20px]">
+                                {{ speaker.description }}
+                            </h5>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <button (click)="onNext()" class="z-10 flex h-fit shrink-0 items-center justify-center rounded-full border-2 border-transparent p-1 text-red-600 transition-colors duration-300 hover:bg-red-600 hover:text-white" aria-label="Next Speaker">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>

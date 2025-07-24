@@ -1,0 +1,59 @@
+<div class="flex h-screen">
+    <aside class="relative min-w-[450px] max-w-[450px] flex-col items-center overflow-hidden bg-secondary px-2 py-8 hidden flex-1 md:flex">
+        <a routerLink="/" href="/">
+        <img alt="FII IT-ist Logo" loading="lazy" width="170" height="55" decoding="async" data-nimg="1" src="/logo.svg"
+            style="color: transparent;">
+        </a>
+        <p class="mt-16 text-center text-4xl font-semibold text-white">
+            Școala pentru <span class="text-primary">IT</span>-iști <br> și <span class="text-primary">super IT</span>-iști</p>
+            <img
+                alt="Wonder IT-ist" width="1080" height="1350" 
+                class="absolute bottom-24 left-1/2 z-10 ml-[-100px] w-[220px] -translate-x-1/2 transform"
+                src="/wonder-it-ist.svg">
+            <img alt="Captain IT-ist" width="1080" height="1350" 
+                class="absolute bottom-64 left-1/2 z-10 ml-[100px] w-[180px] -translate-x-1/2 transform"
+                src ="/captain-it-ist.svg">
+            <img alt="wave" width="938" height="544"
+                class="absolute -bottom-20 -right-[500px] min-w-[500px] scale-[2.5]" 
+                src="/wave.svg">
+    </aside>
+    <main class="mx-auto flex w-full max-w-96 flex-col items-center justify-center gap-8 bg-white px-8">
+        <h1 class="text-5xl font-bold text-black">Sign in</h1>
+        <form class="w-full" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+            <div class="space-y-2">
+                <label
+                    class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                    for="email">E-mail</label>
+                <input
+                    class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="exemplu@email.com" id="email" name="email" type="email" formControlName="email">
+            </div>
+            <div class="space-y-2 mt-2">
+                <label
+                    class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-semibold"
+                    for="password">Parola</label>
+                <input
+                    class="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="parola" id="password" name="password" type="password" formControlName="password">
+            </div>
+            <button
+                class="inline-flex items-center mt-8 text-white justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 w-full"
+                type="submit">Sign in</button>
+        </form>
+        <span
+            class="relative w-full text-center text-sm text-violet-400 before:absolute before:left-0 before:top-1/2 before:h-[1px] before:w-[calc(50%-8ch)] before:bg-violet-400 after:absolute after:right-0 after:top-1/2 after:h-[1px] after:w-[calc(50%-8ch)] after:bg-violet-400">sau
+            continuă cu</span>
+        <button 
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-transparent hover:text-accent-foreground h-10 px-6 py-2 w-full gap-4 border-neutral-300 text-black transition hover:bg-black/5"
+            (click)="signInWithGoogle()">
+            <img width="24" height="24" src="/google-logo.webp">
+            <span>Google</span>
+        </button>
+        <span class="text-sm font-medium">Nu ai încă cont?
+            <a class="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 text-primary decoration-primary underline-offset-8 hover:underline font-medium h-10 py-2 px-2"
+                routerLink="/sign-up" href="/sign-up">
+                Creează acum
+            </a>
+        </span>
+    </main>
+</div>
