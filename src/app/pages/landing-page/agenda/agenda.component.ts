@@ -22,7 +22,7 @@ export class AgendaComponent implements OnInit {
     authService = inject(AuthService);
     agenda: any;
     platformId = inject(PLATFORM_ID);
-    
+
     halls: any = []
 
     timeSpans = []
@@ -38,6 +38,7 @@ export class AgendaComponent implements OnInit {
 
     ngOnInit() {
         if (!isPlatformBrowser(this.platformId)) return;
+        console.log(this.auth)
         this.sessionsService.getTimeSlots().subscribe((timeSpans: any) => {
             this.timeSpans = timeSpans;
             this.buildAgenda(this.timeSpans, this.halls, this.sessions);

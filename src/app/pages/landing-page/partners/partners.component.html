@@ -1,8 +1,8 @@
 <section class="px-8 py-24 xl:py-40" id="partners-section">
     <div class="mx-auto flex max-w-screen-xl flex-col gap-12 xl:flex-row xl:gap-16">
         <div class="relative flex-1">
-            <p class="z-10 text-center sticky text-2xl font-bold xl:top-36 xl:text-left xl:text-5xl">
-                <span class="absolute sti left-1/2 top-0 -z-10 -mt-8 -translate-x-1/2 transform select-none text-6xl font-extrabold text-secondary/10 xl:left-0 xl:-ml-14 xl:-mt-14 xl:translate-x-0 xl:text-8xl">
+            <p class="z-10 text-center sticky top-0 text-2xl font-bold xl:top-36 xl:text-left xl:text-5xl">
+                <span class="absolute left-1/2 top-0 -z-10 -mt-8 -translate-x-1/2 transform select-none text-6xl font-extrabold text-secondary/10 xl:left-0 xl:-ml-14 xl:-mt-14 xl:translate-x-0 xl:text-8xl">
                     PARTENERI
                 </span>
                 <span class="text-primary">Cine</span>
@@ -15,11 +15,10 @@
             </p>
         </div>
 
-        <div class="grid flex-1 grid-cols-2 gap-6 xl:grid-cols-3 max-h-[800px]">
-
-            <div class="group flex flex-col gap-[1rem] overflow-hidden"
-                 style="mask-image:linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);">
-                <div class="flex shrink-0 animate-marquee-up flex-col gap-[1rem] group-hover:[animation-play-state:paused]" style="--duration: 80s;">
+        <div class="grid flex-1 grid-cols-3 gap-[1rem] xl:gap-6 max-h-96 lg:max-h-[800px] overflow-hidden">
+            <div class="group flex flex-col gap-[1rem] max-h-[140rem] lg:max-h-none" 
+                 style="mask-image:linear-gradient(to bottom, transparent 0%, black 5%, transparent 20%, transparent 30%, transparent 85%, black 100%);">
+                <div class="flex shrink-0 animate-marquee-up flex-col gap-[1rem] group-hover:[animation-play-state:paused]" style="--duration: 20s;">
                     @for (partner of finalAnimatedPartners; track $index) {
                     <a target="_blank" [href]="partner.url">
                         <div class="rounded-lg border bg-card text-card-foreground shadow-sm transition-all bg-white hover:drop-shadow-lg">
@@ -33,9 +32,9 @@
                 </div>
             </div>
 
-            <div class="group flex flex-col gap-[1rem] overflow-hidden"
-                 style="mask-image:linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);">
-                <div class="flex shrink-0 animate-marquee-down flex-col gap-[1rem] group-hover:[animation-play-state:paused]" style="--duration: 75s;">
+            <div class="group flex flex-col gap-[1rem] overflow-hidden  max-h-[140rem] lg:max-h-none"
+                style="mask-image:linear-gradient(to bottom, transparent 0%, black 5%, transparent 20%, transparent 30%, transparent 85%, black 100%);">
+                <div class="flex shrink-0 animate-marquee-down flex-col gap-[1rem] group-hover:[animation-play-state:paused]" style="--duration: 25s;">
                     @for (partner of finalAnimatedPartners; track $index) {
                     <a target="_blank" [href]="partner.url">
                         <div class="rounded-lg border bg-card text-card-foreground shadow-sm transition-all bg-white hover:drop-shadow-lg">
@@ -49,9 +48,9 @@
                 </div>
             </div>
 
-            <div class="group hidden flex-col gap-[1rem] overflow-hidden xl:flex"
-                 style="mask-image:linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);">
-                <div class="flex shrink-0 animate-marquee-up flex-col gap-[1rem] group-hover:[animation-play-state:paused]" style="--duration: 90s;">
+            <div class="group flex-col gap-[1rem] overflow-hidden flex  max-h-[140rem] lg:max-h-none"
+                style="mask-image:linear-gradient(to bottom, transparent 0%, black 5%, transparent 20%, transparent 30%, transparent 85%, black 100%);">
+                <div class="flex shrink-0 animate-marquee-up flex-col gap-[1rem] group-hover:[animation-play-state:paused]" style="--duration: 30s;">
                     @for (partner of finalAnimatedPartners; track $index) {
                     <a target="_blank" [href]="partner.url">
                         <div class="rounded-lg border bg-card text-card-foreground shadow-sm transition-all bg-white hover:drop-shadow-lg">

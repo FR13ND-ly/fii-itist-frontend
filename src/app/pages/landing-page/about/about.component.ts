@@ -14,7 +14,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     sliderIndex = signal(0);
     intervalSubscriber: any;
     sliderTransform = computed(
-        () => `translateX(-${100 * this.sliderIndex()}%)`
+        () => `translateX(-${600 * this.sliderIndex()}px)`
     );
 
     sliderItems = [
