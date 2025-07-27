@@ -6,6 +6,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { userActions } from '../../../state/user/user.actions';
 import Snackbar from 'awesome-snackbar';
+import { EmailForm } from '../../../core/models/auth.model';
 
 @Component({
     selector: 'email-stage',
@@ -31,7 +32,7 @@ export class EmailComponent {
     verified = signal(false);
 
     sendVerificationEmail() {
-        let email: any = this.emailForm.get('email')?.value;
+        let email: string = this.emailForm.get('email')?.value!;
         this.userService.sendVerificationEmail(email).subscribe({
             next: (response) => {
                 this.verificationSent.set(true);
@@ -49,7 +50,7 @@ export class EmailComponent {
     }
 
     async signUpWithGoogle() {
-        let auth:any = await this.authService.GoogleAuth();
+        let auth: any = await this.authService.GoogleAuth();
         let data = {
             email: auth.user.email,
             password: '',
@@ -61,7 +62,7 @@ export class EmailComponent {
         this.nextStage(data);
     }
 
-    nextStage(data: any) {
+    nextStage(data: EmailForm) {
         this.next.emit(data);
     }
 
@@ -106,8 +107,10 @@ export class EmailComponent {
             return;
         }
         let data = {
-            email: this.emailForm.get('email')?.value,
-            password: this.emailForm.get('password')?.value,
+            firstName: '',
+            lastName: '',
+            email: this.emailForm.get('email')?.value!,
+            password: this.emailForm.get('password')?.value!,
             oAuth: false,
         }
         this.nextStage(data);

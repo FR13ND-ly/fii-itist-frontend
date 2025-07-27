@@ -1,8 +1,10 @@
 import { Component, computed, effect, inject, OnDestroy, OnInit, PLATFORM_ID, signal, HostListener } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { interval, map, merge, Subject, Subscription } from 'rxjs';
+import { interval, map, merge, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { SpeakersService } from '../../../core/services/speakers.service';
+import { SessionModel } from '../../../core/models/session.model';
+import { SpeakerModel } from '../../../core/models/speaker.model';
 
 @Component({
     selector: 'lp-speakers',
@@ -19,10 +21,10 @@ export class SpeakersComponent implements OnInit, OnDestroy {
     private intervalSubscriber?: Subscription;
     isAnimating = signal(false);
 
-    speakers$ = this.speakersService.getSpeakers();
-    speakers = toSignal<any, any>(this.speakers$, { initialValue: [] });
-    
-    visibleItems = signal(3); // Default to 3, will be updated on init
+    speakers$: Observable<SpeakerModel[]> = this.speakersService.getSpeakers();
+    speakers = toSignal<SpeakerModel[], SpeakerModel[]>(this.speakers$, { initialValue: [] });
+
+    visibleItems = signal(3);
     
     currentIndex = signal(this.visibleItems());
     isTransitioning = signal(true);

@@ -9,7 +9,7 @@ import { IsAdminDirective } from '../../../../core/directives/is-admin.directive
   styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent {
-sections = [
+  sections = [
     {
       title: '',
       items: [

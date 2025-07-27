@@ -7,7 +7,7 @@ import { userActions } from '../../../../state/user/user.actions';
 
 @Component({
   selector: 'dasboard-header',
-  imports: [AsyncPipe, RouterLink, CanScanDirective],
+  imports: [RouterLink, CanScanDirective],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

@@ -1,5 +1,6 @@
 import { Directive, inject, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { AuthModel } from '../models/auth.model';
 
 @Directive({
   selector: '[authenticated]'
@@ -12,7 +13,7 @@ export class AuthenticatedDirective {
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef
   ) {
-    const user = this.authService.getUserData();
+    const user: AuthModel = this.authService.getUserData();
     if (user.email) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {

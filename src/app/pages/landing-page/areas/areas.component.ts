@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AreaModel } from '../../../core/models/area.model';
 
 @Component({
     selector: 'lp-areas',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
     styleUrl: './areas.component.scss'
 })
 export class AreasComponent {
-    areas = [
+    areas: AreaModel[] = [
         {
             icon: 'desktop_windows',
             title: 'Frontend',

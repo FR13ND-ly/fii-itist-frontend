@@ -6,6 +6,7 @@ import { EmailComponent } from './email/email.component';
 import { FormBuilder } from '@angular/forms';
 import e from 'express';
 import { AuthService } from '../../core/services/auth.service';
+import { EmailForm } from '../../core/models/auth.model';
 
 @Component({
     selector: 'app-sign-up',
@@ -41,7 +42,7 @@ export class SignUpComponent {
         heardAboutUs: [''],
     });
 
-    handleEmail(emailForm: any) {
+    handleEmail(emailForm: EmailForm) {
         this.stage.set(1);
         this.emailData.email = emailForm.email;
         this.emailData.password = emailForm.password;

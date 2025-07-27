@@ -1,1 +1,49 @@
-<p>scanner works!</p>
+<scanner-header />
+<div class="mt-40 mb-20 flex flex-col items-center w-full max-w-xl mx-auto relative">
+    <div>
+        @if (sessions$ | async; as sessions) {
+        <select
+            (change)="onSelectTalk(talks.value)" #talks
+            class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full" formControlName="educationLevel">
+            <option selected disabled>Talk</option>
+            @for (option of sessions; track option) {
+                <option [value]="option._id">{{ option.title }}</option>
+            }
+        </select>
+        }
+    </div>
+    <div class="flex flex-col items-center w-full max-w-xl mx-auto relative mt-4">
+        <div #qrReader id="qr-reader" class="w-full overflow-hidden rounded-lg min-h-[250px]"></div>
+
+        <div class="flex gap-3 mt-4 w-full justify-center">
+            @if (cameras().length === 0) {
+            <p class="text-gray-500">Loading cameras...</p>
+            } @else {
+            <select (change)="onCameraChange($event)"
+                class="px-4 py-2 bg-white border dark:bg-gray-900 dark:border-gray-800 border-gray-300 rounded-lg">
+                @for (camera of cameras(); track camera.id) {
+                <option [value]="camera.id" [selected]="camera.id === currentCameraId">
+                    {{ camera.label }}
+                </option>
+                }
+            </select>
+            }
+        </div>
+
+        @if (lastResult()) {
+        <div class="mt-5 w-full p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
+            <h3 class="text-lg font-medium mb-2">Scanned Result</h3>
+            <div class="w-full p-2 border rounded mb-3 font-mono break-all" [ngClass]="{
+            'text-green-600 border-green-500': scanStatus() === 'success',
+            'text-red-600 border-red-500': scanStatus() === 'error'
+            }">
+                {{ lastResult() }}
+            </div>
+            <button (click)="clearResult()"
+                class="px-3 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all">
+                Clear
+            </button>
+        </div>
+        }
+    </div>
+</div>

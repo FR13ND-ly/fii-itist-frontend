@@ -1,0 +1,60 @@
+<nav class="fixed top-0 z-50 flex min-h-24 w-screen justify-center bg-secondary/90 px-8 backdrop-blur">
+  <div class="flex w-full max-w-screen-xl items-center justify-between">
+    <a href="/">
+      <img alt="logo" width="170" height="55" src="logo.svg"/>
+    </a>
+    @if (user$ | async; as user) {
+    <div class="flex gap-6">
+      @if (user.canScan) {
+      <button class="text-lg cursor-pointer text-white flex items-center justify-center font-bold" *canScan>
+        <span class="material-symbols-outlined scale-150">qr_code</span>
+      </button>
+      }
+      <div class="relative">
+        <button class="text-lg cursor-pointer text-white flex items-center justify-center font-bold" id="account-button"
+          popovertarget="account-menu">
+          <span class="material-symbols-outlined scale-150">account_circle</span>
+        </button>
+        <div class="r-20 top-20 m-0 right-0 px-1 rounded-lg shadow-lg ring-1 dark:bg-gray-800 ring-gray-900/5"
+          [ngStyle]="{ left: marginLeft() + 'px' }" popover id="account-menu">
+          <div class="flex-auto flex-col text-sm/6">
+            <section class="flex gap-3 items-center my-4 px-4 pr-8">  
+              <div class="flex flex-col">
+                <b class="text-base dark:text-white">{{ auth.firstName }} {{ auth.lastName }}</b>
+                <span class="text-gray-800 dark:text-white">{{ auth.email }}</span>
+              </div>
+            </section>
+            <section class="mt-2 my-2 px-2 select-none">
+              <a class="flex text-gray-800 align-middle gap-2 dark:text-white p-2 cursor-pointer rounded-md hover:bg-black/5 dark:hover:bg-gray-700 pl-4"
+                href="/dashboard" (click)="onHidePopover()">
+                <span class="material-symbols-outlined scale-75">dashboard</span>
+                <span>Dashboard</span>
+              </a>
+            </section>
+            <hr class="dark:border-gray-600">
+            <section class="my-2 px-2 select-none">
+              <a (click)="onLogout()" class="flex align-middle gap-2 text-gray-800 dark:text-white p-2 cursor-pointer rounded-md hover:bg-black/5 dark:hover:bg-gray-700 pl-4">
+                <span class="material-symbols-outlined scale-75">logout</span>
+                <span>Log out</span>
+              </a>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    } @else {
+      <div class="hidden gap-4 xl:flex">
+        <a
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 bg-primary text-primary-foreground hover:bg-primary/75 h-10 px-6 py-2 text-white"
+          routerLink="/sign-in"
+          href="/sign-in">Sign in</a>
+        <a
+          class="inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 border border-primary bg-transparent hover:bg-white/5 h-10 px-6 py-2 text-white hover:text-white"
+          routerLink="/sign-up"
+          href="/sign-up">Sign up</a>
+      </div>
+    
+    }
+  </div>
+</nav>

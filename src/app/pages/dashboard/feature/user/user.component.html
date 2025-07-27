@@ -1,0 +1,44 @@
+<div class="flex items-center mb-2">
+  <a
+    routerLink="/dashboard/users"
+    href="/dashboard/users"
+    class="text-primary rounded-lg flex items-center space-x-1 pl-2 pr-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-800 select-none"
+  >
+    <span class="material-symbols-outlined scale-75"> arrow_back </span>
+    <span>Înapoi</span>
+  </a>
+</div>
+@if (user$ | async; as user) {
+<div class="flex flex-col gap-4 mb-4 lg:mb-6">
+  <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white lg:mt-2">{{ user.firstName }} {{ user.lastName }}</h1>
+  <p>{{ user.email }}</p>
+</div>
+<div class="flex border-b border-gray-200 dark:border-gray-700 select-none">
+  <button
+    class="px-4 py-2 text-xs lg:text-sm font-medium text-gray-500 hover:text-primary hover:border-b-2 hover:border-primary dark:hover:text-gray-300 dark:hover:border-primary"
+    routerLink="/dashboard/users/{{user._id}}"
+    routerLinkActive="text-primary border-b-2 border-primary hover:text-primary hover:border-b-2 hover:border-primary dark:text-primary dark:border-indigo-400 dark:hover:text-indigo-300 dark:hover:border-indigo-300"
+    [routerLinkActiveOptions]="{exact: true}"
+  >
+    Detalii
+  </button>
+  <button
+    class="px-4 py-2 text-xs lg:text-sm font-medium text-gray-500 hover:text-primary hover:border-b-2 hover:border-primary dark:hover:text-gray-300 dark:hover:border-primary"
+    routerLink="/dashboard/users/{{user._id}}/enrolments"
+    routerLinkActive="text-primary border-b-2 border-primary hover:text-primary hover:border-b-2 hover:border-primary dark:text-primary dark:border-indigo-400 dark:hover:text-indigo-300 dark:hover:border-indigo-300"
+  >
+    Aprecieri
+  </button>
+  <button
+    class="px-4 py-2 text-xs lg:text-sm font-medium text-gray-500 hover:text-primary hover:border-b-2 hover:border-primary dark:hover:text-gray-300 dark:hover:border-primary"
+    routerLink="/dashboard/users/{{user._id}}/attendances"
+    routerLinkActive="text-primary border-b-2 border-primary hover:text-primary hover:border-b-2 hover:border-primary dark:text-primary dark:border-indigo-400 dark:hover:text-indigo-300 dark:hover:border-indigo-300"
+    [routerLinkActiveOptions]="{exact: true}"
+  >
+    Prezențe
+  </button>
+</div>
+<div class="mt-6">
+  <router-outlet />
+</div>
+}

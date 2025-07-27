@@ -1,16 +1,17 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { QrComponent } from '../../ui/qr-code/qr-code.component';
 import { UserService } from '../../../../core/services/user.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { AsyncPipe, isPlatformBrowser, JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { DialogService } from '@ngneat/dialog';
 import { QrCodeDialogComponent } from '../../dialogs/qr-code-dialog/qr-code-dialog.component';
-import { HomeAgendaComponent } from '../../ui/home-agenda/home-agenda.component';
+import { TalksComponent } from '../../../../core/components/talks/talks.component';
+import { QrCodeComponent } from 'ng-qrcode';
+import { UserModel } from '../../../../core/models/user.model';
 
 @Component({
   selector: 'app-home',
-  imports: [QrComponent, HomeAgendaComponent, AsyncPipe],
+  imports: [QrCodeComponent, AsyncPipe, TalksComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
     return this.authService.getUserData();
   }
 
-  user$!: Observable<any>
+  user$!: Observable<UserModel>
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;

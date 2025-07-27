@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { SessionModel } from '../models/session.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +11,20 @@ export class SessionsService {
   http = inject(HttpClient);
   apiUrl = environment.apiUrl + 'sessions';
 
-  getSessions() {
-    return this.http.get(`${this.apiUrl}`);
+  getSessions() : Observable<SessionModel[]> {
+    return this.http.get<SessionModel[]>(`${this.apiUrl}`);
+  }
+
+  getSession(id: string) {
+    return this.http.get<SessionModel>(`${this.apiUrl}/${id}`);
   }
 
   addSession(session: any) {
-    return this.http.post(`${this.apiUrl}`, session);
+    return this.http.post<SessionModel>(`${this.apiUrl}`, session);
   }
 
   updateSession(id: string, session: any) {
-    return this.http.put(`${this.apiUrl}/${id}`, session);
+    return this.http.put<SessionModel>(`${this.apiUrl}/${id}`, session);
   }
 
   deleteSession(id: string) {
@@ -55,5 +61,13 @@ export class SessionsService {
 
   deleteHall(id: string) {
     return this.http.delete(`${this.apiUrl}/halls/${id}`);
+  }
+
+  getSessionsByUserEnrolments(userId: string) {
+    return this.http.get<SessionModel[]>(`${this.apiUrl}/user/${userId}/enrolments`);
+  }
+
+  getSessionsByUserAttendances(userId: string) {
+    return this.http.get<SessionModel[]>(`${this.apiUrl}/user/${userId}/attendances`);
   }
 }

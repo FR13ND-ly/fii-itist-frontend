@@ -6,6 +6,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SpeakerEditorDialogComponent } from '../../dialogs/speaker-editor-dialog/speaker-editor-dialog.component';
+import { SpeakerModel } from '../../../../core/models/speaker.model';
 
 @Component({
   selector: 'app-speakers',
@@ -18,15 +19,15 @@ export class SpeakersComponent {
   speakersService = inject(SpeakersService)
   store = inject(Store)
 
-  speakers$: Observable<any> = this.speakersService.getSpeakers()
+  speakers$: Observable<SpeakerModel[]> = this.speakersService.getSpeakers()
 
-  onAddSpeaker(meetings: any) {
+  onAddSpeaker(speakers: SpeakerModel[]) {
     let d = this.dialog.open(SpeakerEditorDialogComponent);
-    d.afterClosed$.subscribe((res) => {
+    d.afterClosed$.subscribe((res: any) => {
       if (!res) return;
       this.speakersService.addSpeaker(res).subscribe(
         (res: any) => {
-          meetings.unshift(res.speaker);
+          speakers.unshift(res.speaker);
         },
         (err) => {
           console.error(err);
@@ -35,15 +36,15 @@ export class SpeakersComponent {
     });
   }
 
-  onEditSpeaker(meetings: any, index: number) {
+  onEditSpeaker(speakers: SpeakerModel[], index: number) {
     let d = this.dialog.open(SpeakerEditorDialogComponent, {
-      data: meetings[index],
+      data: speakers[index],
     });
-    d.afterClosed$.subscribe((res) => {
+    d.afterClosed$.subscribe((res: any) => {
       if (!res) return;
-      this.speakersService.updateSpeaker(meetings[index]._id, res).subscribe(
+      this.speakersService.updateSpeaker(speakers[index]._id!, res).subscribe(
         (updatedSpeaker: any) => {
-          meetings[index] = updatedSpeaker.speaker;
+          speakers[index] = updatedSpeaker.speaker;
         },
         (err) => {
           console.error(err);
@@ -52,10 +53,10 @@ export class SpeakersComponent {
     });
   }
 
-  onDeleteSpeaker(meetings: any, index: number) {
-    this.speakersService.deleteSpeaker(meetings[index]._id).subscribe(
+  onDeleteSpeaker(speakers: any, index: number) {
+    this.speakersService.deleteSpeaker(speakers[index]._id).subscribe(
       () => {
-        meetings.splice(index, 1);
+        speakers.splice(index, 1);
       },
       (err) => {
         console.error(err);

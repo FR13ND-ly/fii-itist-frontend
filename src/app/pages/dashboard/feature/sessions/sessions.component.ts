@@ -8,10 +8,11 @@ import { TimeSlotEditorDialogComponent } from '../../dialogs/time-slot-editor-di
 import { HallEditorDialogComponent } from '../../dialogs/hall-editor-dialog/hall-editor-dialog.component';
 import { SessionEditorDialogComponent } from '../../dialogs/session-editor-dialog/session-editor-dialog.component';
 import { AuthService } from '../../../../core/services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sessions',
-  imports: [NgStyle],
+  imports: [NgStyle, RouterLink],
   templateUrl: './sessions.component.html',
   styleUrl: './sessions.component.scss'
 })
@@ -196,7 +197,7 @@ export class SessionsComponent implements OnInit {
       });
       d.afterClosed$.subscribe((res: any) => {
         if (!res) return;
-        this.sessionsService.addSession(res.data).subscribe(
+        this.sessionsService.addSession(res).subscribe(
           (newSession: any) => {
               this.sessions.push(newSession.session);
               this.sessionsService.getSessions().subscribe(
@@ -210,46 +211,6 @@ export class SessionsComponent implements OnInit {
               );
           }
         );
-      });
-    }
-
-    onEditSession(session: any) {
-      let d = this.dialog.open(SessionEditorDialogComponent, {
-        data: session,
-      });
-      d.afterClosed$.subscribe((res: any) => {
-        if (!res) return;
-        if (res.action === 'delete') {
-          this.sessionsService.deleteSession(session._id).subscribe(
-            () => {
-              this.sessionsService.getSessions().subscribe(
-                (sessions: any) => {
-                  this.sessions = sessions;
-                  this.buildAgenda(this.timeSlots, this.halls, this.sessions);
-              },
-              (err) => {
-                console.error(err);
-              }
-              );
-            }
-          );
-          return;
-        }
-        else if (res.action === 'update') {
-          this.sessionsService.updateSession(session._id, res.data).subscribe(
-            (updatedSession: any) => {
-              this.sessionsService.getSessions().subscribe(
-                (sessions: any) => {
-                  this.sessions = sessions;
-                  this.buildAgenda(this.timeSlots, this.halls, this.sessions);
-                }
-              )
-            },
-            (err) => {
-              console.error(err);
-            }
-          );
-        }
       });
     }
 }

@@ -15,7 +15,7 @@ import { selectUser } from '../../../state/user/user.reducer';
 })
 export class HeaderComponent implements AfterViewInit {
   @Input() activeSectionId: string | null = null;
- platformId = inject(PLATFORM_ID)
+  platformId = inject(PLATFORM_ID)
   authService = inject(AuthService);
   store = inject(Store);
   user$ = this.store.select(selectUser);

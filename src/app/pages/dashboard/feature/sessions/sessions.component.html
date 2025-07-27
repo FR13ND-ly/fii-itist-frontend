@@ -35,7 +35,7 @@
                         @else {
                         <td class="cursor-pointer border p-2 hover:bg-gray-50 relative">
                             @if (col) {
-                                <div class="h-48" (click)="onEditSession(col)">
+                                <div class="h-48" routerLink="/dashboard/talks/{{ col._id }}">
                                     <div class="font-montserrat rounded-[4px] font-semibold mb-2 w-fit px-2 py-1 text-[10px] xl:text-base"
                                         [ngStyle]="{
                                             'background-color': col.typeColor + '33',

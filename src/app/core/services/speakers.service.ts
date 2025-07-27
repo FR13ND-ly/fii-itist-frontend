@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { SpeakerModel } from '../models/speaker.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,14 @@ export class SpeakersService {
   apiUrl = environment.apiUrl + 'speakers'; 
 
   getSpeakers() {
-    return this.http.get(this.apiUrl);
+    return this.http.get<SpeakerModel[]>(this.apiUrl);
   }
 
-  addSpeaker(speaker: any) {
+  addSpeaker(speaker: SpeakerModel) {
     return this.http.post(this.apiUrl, speaker);
   }
 
-  updateSpeaker(id: string, speaker: any) {
+  updateSpeaker(id: string, speaker: SpeakerModel) {
     return this.http.put(`${this.apiUrl}/${id}`, speaker);
   }
 

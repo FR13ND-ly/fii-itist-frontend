@@ -6,7 +6,7 @@ import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-session-editor-dialog',
-  imports: [ReactiveFormsModule, NgStyle],
+  imports: [ReactiveFormsModule],
   templateUrl: './session-editor-dialog.component.html',
   styleUrl: './session-editor-dialog.component.scss'
 })
@@ -32,14 +32,6 @@ export class SessionEditorDialogComponent implements OnInit {
     this.speakers$.subscribe((speakers: any) => {
       this.speakers = speakers;
     });
-    if (!this.session?._id) return;
-    this.selectedSpeakers = this.session.speakers.map((s: any) => s._id);
-    this.sessionForm.patchValue({
-      type: this.session.type ?? '',
-      typeColor: this.session.typeColor ?? '#3b82f6',
-      title: this.session.title ?? '',
-      description: this.session.description
-    });
   }
 
   onSpeakerChange(speakerId: any): void {
@@ -59,20 +51,12 @@ export class SessionEditorDialogComponent implements OnInit {
       return;
     }
     let res = {
-      action: this.session?._id ? 'update' : 'create',
-      data: {
-        ...this.sessionForm.value,
-        hallId: this.session?.hallId,
-        timeSlotId: this.session?.timeSlotId,
-        speakers: this.selectedSpeakers
-      },
+      ...this.sessionForm.value,
+      hallId: this.session?.hallId,
+      timeSlotId: this.session?.timeSlotId,
+      speakers: this.selectedSpeakers
     }
     this.ref.close(res);
-    this.sessionForm.reset();
-  }
-
-  onDelete(): void {
-    this.ref.close({ action: 'delete' });
     this.sessionForm.reset();
   }
 }

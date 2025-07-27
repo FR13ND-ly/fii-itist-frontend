@@ -38,7 +38,9 @@
         </div>
         <div class="flex justify-between mt-6">
             <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">Salvează</button>
+            @if (timeSlot?._id) {
             <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" (click)="onDelete()">Șterge</button>
+            }
         </div>
     </form>
 </div>

@@ -52,6 +52,11 @@
                 <span class="material-symbols-outlined scale-75">dashboard</span>
                 <span>Dashboard</span>
               </a>
+              <a class="flex text-gray-800 align-middle gap-2 dark:text-white p-2 cursor-pointer rounded-md hover:bg-black/5 dark:hover:bg-gray-700 pl-4"
+                routerLink="/scanner" href="/scanner" (click)="onHidePopover()" *canScan>
+                <span class="material-symbols-outlined scale-75">barcode_scanner</span>
+                <span>Scanner</span>
+              </a>
             </section>
             <hr class="dark:border-gray-600">
             <section class="my-2 px-2 select-none">

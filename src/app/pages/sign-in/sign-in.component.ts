@@ -4,6 +4,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { userActions } from '../../state/user/user.actions';
+import { LoginCredentials } from '../../core/models/auth.model';
 
 @Component({
     selector: 'app-sign-in',
@@ -25,15 +26,15 @@ export class SignInComponent {
 
     async signInWithGoogle() {
         let auth = await this.authService.GoogleAuth();
-        let data = {
-            email: auth.user.email,
+        let data: LoginCredentials = {
+            email: auth.user.email!,
             password: '',
             oAuth: true,
         }
         this.signIn(data);
     }
 
-    signIn(loginCredentials: any) {
+    signIn(loginCredentials: LoginCredentials) {
         this.store.dispatch(userActions.login({ loginCredentials }));
     }
 
@@ -43,8 +44,11 @@ export class SignInComponent {
         if (this.signInForm.invalid) {
         
         }
-        let data = {
-            ...this.signInForm.value,
+        const email = this.signInForm.value.email!;
+        const password = this.signInForm.value.password!;
+        let data: LoginCredentials = {
+            email,
+            password,
             oAuth: false,
         }
         this.signIn(data);

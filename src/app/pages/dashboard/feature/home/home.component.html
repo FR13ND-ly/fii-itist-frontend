@@ -14,12 +14,12 @@
                 (click)="openQrDialog(user._id)">
                 <div  class="h-[170px] w-[170px] rounded-xl overflow-hidden box-border bg-white border-2 border-gray-200">
                     <div class="relative">
-                        <qr [code]="user._id" />
+                        <qr-code [value]="user._id" size="170" errorCorrectionLevel="M" />
                     </div>
                 </div>
                 <p class="text-white">Scanează-mă</p>
             </div>
         </div>
     }
-    <home-agenda />
+    <talks />
 </div>

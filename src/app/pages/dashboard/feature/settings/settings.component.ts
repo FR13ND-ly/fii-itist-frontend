@@ -4,6 +4,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { UserService } from '../../../../core/services/user.service';
 import { first } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { UserModel } from '../../../../core/models/user.model';
 
 @Component({
   selector: 'app-settings',
@@ -35,7 +36,7 @@ export class SettingsComponent implements OnInit {
 
     ngOnInit(): void {
         if (!isPlatformBrowser(this.platformId)) return;
-        this.userService.getUserById(this.auth.id).subscribe((user: any) => {
+        this.userService.getUserById(this.auth.id).subscribe((user: UserModel) => {
             this.settingsForm.patchValue({
             firstName: user.firstName || '',
             lastName: user.lastName || '',

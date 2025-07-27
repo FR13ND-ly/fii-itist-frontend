@@ -25,11 +25,11 @@ export class LandingPageComponent implements AfterViewInit, OnDestroy {
     private observer!: IntersectionObserver;
 
     ngAfterViewInit(): void {
+        if (!isPlatformBrowser(this.platformId)) return;
         const options = {
             root: null,
             threshold: 0.2
         };
-        if (!isPlatformBrowser(this.platformId)) return;
         this.observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {

@@ -3,8 +3,13 @@
     <a href="/" routerLink="/">
       <img alt="logo" width="170" height="55" src="logo.svg"/>
     </a>
-    <button
-      (click)="logout()">
-      <span class="material-symbols-outlined text-white">logout</span></button>
+    <div class="flex gap-4">
+      <button
+        routerLink="/scanner" *canScan>
+        <span class="material-symbols-outlined text-white">barcode_scanner</span></button>
+      <button
+        (click)="logout()">
+        <span class="material-symbols-outlined text-white">logout</span></button>
+    </div>
   </div>
 </nav>

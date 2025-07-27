@@ -20,6 +20,14 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'scanner',
+    loadComponent: () =>
+      import('./pages/scanner/scanner.component').then(
+        (m) => m.ScannerComponent
+      ),
+      canActivate: [canScanGuard],
+  },
+  {
     path: 'sign-in',
     loadComponent: () =>
       import('./pages/sign-in/sign-in.component').then(
@@ -34,13 +42,6 @@ export const routes: Routes = [
         (m) => m.SignUpComponent
       ),
       canActivate: [logoutGuard],
-  },
-  {
-    path: 'scanner',
-    loadComponent: () =>
-      import('./pages/scanner/scanner.component').then(
-        (m) => m.ScannerComponent
-      ),
-      canActivate: [canScanGuard],
-  },
+  }
+  
 ];

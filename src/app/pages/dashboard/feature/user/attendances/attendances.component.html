@@ -1,0 +1,21 @@
+@if (sessions$ | async; as sessions) {
+<div class="flex flex-col gap-4">
+    @for (session of sessions; track session._id) {
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg cursor-pointer hover:bg-gray-100"
+        routerLink="/dashboard/talks/{{ session._id }}">
+        <div class="flex items-center justify-between p-4">
+            <div class="flex flex-col">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ session.title }}</h2>
+                <div class="font-montserrat rounded-[4px] font-semibold w-fit px-2 py-1 text-[10px] xl:text-base mt-2"
+                    [ngStyle]="{
+                            'background-color': session.typeColor + '33',
+                            'color': getTextColor(session.typeColor)
+                        }">
+                    {{ session.type }}
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+}
